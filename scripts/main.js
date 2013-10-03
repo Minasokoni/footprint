@@ -1,6 +1,6 @@
-var _fp = _fp || (function($){
+var _fp = _fp || (function($){ // namespace _fp
 
-  var trackData = []; // 
+  var trackData = []; //empty array
 
   var init = function(params){
     this.params = params;
@@ -23,11 +23,11 @@ var _fp = _fp || (function($){
       trackData.push('_event:',[category, action, label, opt1, opt2]);
       track._add();
     },
-    _add: function(){
+    _add: function(){ // private function
 
       console.log(trackData);
       // if the user is verified you can push data to the account
-      // $.post('/user/add/', {information}, function(data){
+      // $.post('/user/add/', {trackData}, function(data){
       //  if(data.success){
       //    // post data to server
       //  }
@@ -36,7 +36,7 @@ var _fp = _fp || (function($){
 
   };
 
-  var _user = {
+  var _user = { // private methods
     isUser: function(params){
       // check to see if the user account exists before trying to push data to the account
       // $.get('/user/'+params.userid, function(data){
@@ -48,9 +48,9 @@ var _fp = _fp || (function($){
   };
 
 
-  return {
+  return { // Public functions
     init: init,
     trackPage:track.page,
     trackEvent:track.event
   };
-})(jQuery);
+})(jQuery); // self invoking module 

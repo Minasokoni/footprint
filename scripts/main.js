@@ -11,8 +11,11 @@ var _fp = _fp || (function($){
 
   var track = {
     page: function(){
-      var title = document.title;
-      trackData.push('_page:',[title]);
+      var title = document.title,
+      d         = new Date(),
+      datetime  = d.toISOString();
+
+      trackData.push('_page:',[title, datetime]);
       track._add();
     },
     event: function(category, action, label, opt1, opt2){
@@ -20,9 +23,10 @@ var _fp = _fp || (function($){
       trackData.push('_event:',[category, action, label, opt1, opt2]);
       track._add();
     },
-
     _add: function(){
+
       console.log(trackData);
+      // if the user is verified you can push data to the account
       // $.post('/user/add/', {information}, function(data){
       //  if(data.success){
       //    // post data to server
@@ -34,6 +38,7 @@ var _fp = _fp || (function($){
 
   var _user = {
     isUser: function(params){
+      // check to see if the user account exists before trying to push data to the account
       // $.get('/user/'+params.userid, function(data){
       //   if(data.success){
       //     // do work!

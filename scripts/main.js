@@ -1,32 +1,32 @@
 var _fp = _fp || (function($){
 
-  var information = [];
+  var trackData = []; // 
 
   var init = function(params){
     this.params = params;
     console.log(params);
     _user.isUser(params);
+    track.page();
   };
 
   var track = {
     page: function(){
       var title = document.title;
-      information.push(title);
+      trackData.push('_page:',[title]);
       track._add();
     },
-    click: function(){
-      information.push('whatever was clicked');
-      track._add();
-    },
-    event: function(eventType){
-      information.push('video play');
+    event: function(category, action, label, opt1, opt2){
+      // 'books', 'click', 'Batman - Eating Kids', 'optional', optional
+      trackData.push('_event:',[category, action, label, opt1, opt2]);
       track._add();
     },
 
     _add: function(){
-      console.log(information);
+      console.log(trackData);
       // $.post('/user/add/', {information}, function(data){
-
+      //  if(data.success){
+      //    // post data to server
+      //  }
       // });
     }
 
@@ -45,7 +45,6 @@ var _fp = _fp || (function($){
 
   return {
     init: init,
-    trackClick:track.click,
     trackPage:track.page,
     trackEvent:track.event
   };
